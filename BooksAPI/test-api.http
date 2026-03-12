@@ -1,0 +1,67 @@
+### Books API - Test Script
+### Use with VS Code REST Client extension (install "REST Client" extension)
+
+@baseUrl = https://localhost:5001/api/books
+@contentType = application/json
+
+### 1. Get All Books
+GET {{baseUrl}}
+
+### 2. Get Book by ID (Get first book)
+GET {{baseUrl}}/1
+
+### 3. Get Non-existent Book (Test 404 Error)
+GET {{baseUrl}}/999
+
+### 4. Create New Book
+POST {{baseUrl}}
+Content-Type: {{contentType}}
+
+{
+  "title": "1984",
+  "author": "George Orwell",
+  "isbn": "978-0-452-26423-9",
+  "publicationDate": "1949-06-08"
+}
+
+### 5. Create Another Book
+POST {{baseUrl}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Pride and Prejudice",
+  "author": "Jane Austen",
+  "isbn": "978-0-141-43951-8",
+  "publicationDate": "1813-01-28"
+}
+
+### 6. Update Book (Update ID 1)
+PUT {{baseUrl}}/1
+Content-Type: {{contentType}}
+
+{
+  "title": "The Great Gatsby - Revised Edition",
+  "author": "F. Scott Fitzgerald",
+  "isbn": "978-0-7432-7356-5",
+  "publicationDate": "1925-04-10"
+}
+
+### 7. Update Non-existent Book (Test 404 Error)
+PUT {{baseUrl}}/999
+Content-Type: {{contentType}}
+
+{
+  "title": "Non-existent",
+  "author": "Nobody",
+  "isbn": "000-000",
+  "publicationDate": "2000-01-01"
+}
+
+### 8. Delete Book (Delete ID 2)
+DELETE {{baseUrl}}/2
+
+### 9. Delete Non-existent Book (Test 404 Error)
+DELETE {{baseUrl}}/999
+
+### 10. Get All Books After Changes
+GET {{baseUrl}}
